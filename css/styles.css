@@ -71,6 +71,7 @@ button {
 .list {
   list-style: none;
 }
+
 .link {
   text-decoration: none;
 }
@@ -182,28 +183,55 @@ body {
 .logo-color-header {
   color: var(--logo-color-header-last);
 }
+
+.menu-link.active {
+  color: #404bbf;
+}
+
 .menu-link {
+  position: relative;
   padding: 24px 0;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--color-menu-link);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+.menu-link::after {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  display: block;
+  content: '';
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.menu-link.active::after {
+  background-color: #404bbf;
+}
+
 .menu-link:hover,
 .menu-link:focus {
   color: var(--accent-color-menu-link);
 }
+
 .address {
   font-style: normal;
 }
+
 .address-link {
   font-weight: 400;
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--color-address-link);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .address-link:hover,
 .address-link:focus {
   color: var(--accent-color-address-link);
@@ -240,6 +268,7 @@ body {
   color: var(--hero-title-text-color);
   margin-bottom: 48px;
 }
+
 .hero-btn {
   display: block;
   padding: 16px 32px;
@@ -255,7 +284,9 @@ body {
   letter-spacing: 0.04em;
   color: var(--hero-btn-text-color);
   background-color: var(--background-color-hero-btn);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .hero-btn:hover,
 .hero-btn:focus {
   background-color: var(--accent-background-color-hero-btn);
@@ -350,6 +381,7 @@ body {
   color: var(--secondary-text-color);
   margin-bottom: 8px;
 }
+
 .team-item-description {
   font-weight: 400;
   font-size: 16px;
@@ -380,6 +412,7 @@ body {
   height: 100%;
   border-radius: 50%;
   background-color: #4d5ae5;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-list-link:hover,
@@ -412,6 +445,8 @@ body {
   border: 1px solid #8e8f99;
   border-radius: 4px;
   color: #8e8f99;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customers-list-link:hover,
@@ -454,7 +489,12 @@ body {
   background-color: var(--background-color-service-btn);
   border: 1px solid #e7e9fc;
   border-radius: 4px;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .service-btn:hover,
 .service-btn:focus {
   color: var(--service-btn-text-accent-color);
@@ -478,12 +518,46 @@ body {
 
 .portfolio-list-link {
   display: block;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .portfolio-list-link:hover,
 .portfolio-list-link:focus {
   box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08),
     0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
+}
+
+.portfolio-overlay-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  transform: translate(0, 100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+
+  color: #f4f4fd;
+  background-color: #4d5ae5;
+  padding-top: 40px;
+  padding-right: 32px;
+  padding-bottom: 40px;
+  padding-left: 32px;
+}
+
+.portfolio-list-link:hover .overlay,
+.portfolio-list-link:focus .overlay {
+  transform: translate(0, 0);
 }
 
 .service-card-content {
@@ -536,6 +610,7 @@ body {
 .logo-color-footer {
   color: var(--logo-color-footer-last);
 }
+
 .footer-description {
   width: 264px;
   font-weight: 400;
@@ -574,6 +649,7 @@ body {
   color: #f4f4fd;
   border-radius: 50%;
   background-color: #4d5ae5;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-media-list-link:hover,
@@ -586,3 +662,77 @@ body {
 }
 
 /* -------------/Footer -------------*/
+
+/* ----------Modal Window ------------------*/
+.backdrop {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition-delay: 250ms;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 408px;
+  height: 584px;
+  background-color: #fcfcfc;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 250ms;
+}
+
+.backdrop.is-hidden .modal {
+  opacity: 0;
+  transform: translate(-50%, -70%);
+  transition-delay: 0ms;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e7e9fc;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-close-btn:hover,
+.modal-close-btn:focus {
+  background-color: #404bbf;
+}
+
+.modal-close-btn-icon {
+  fill: #2e2f42;
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal-close-btn:hover .modal-close-btn-icon,
+.modal-close-btn:focus .modal-close-btn-icon {
+  fill: #ffffff;
+}
+/* ----------/Modal Window ------------------*/
